@@ -31,6 +31,8 @@ export class Game {
   ui: UI
   lives: number
   gameEnd: boolean
+  obstacleTimer: number
+  obstacleInterval: number
 
   constructor(
     context: CanvasRenderingContext2D,
@@ -57,6 +59,8 @@ export class Game {
     this.player = new Player(context, this, playerInfo)
     this.obstacles = []
     this.powerUps = []
+    this.obstacleTimer = 0
+    this.obstacleInterval = 900
   }
 
   addListener() {
@@ -77,12 +81,6 @@ export class Game {
       this.player.x + this.player.size / 2 > block.x + block.size / 4 &&
       this.player.x + this.player.size / 2 < block.x + (block.size / 4) * 3
     )
-  }
-
-  generateBlocks() {
-    const timeDelay = this.randomInterval(this.presetTime)
-    this.obstacles?.push(new Obstacle(this.gameSpeed, this.ctx, this))
-    setTimeout(() => this.generateBlocks(), timeDelay)
   }
 
   shouldIncreaseSpeed() {
@@ -141,7 +139,7 @@ export class Game {
     )
   }
 
-  start = (ctx: CanvasRenderingContext2D) => {
+  start = (ctx: CanvasRenderingContext2D, deltaTime: number) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
     this.background_.update()
@@ -152,6 +150,13 @@ export class Game {
 
     if (Math.random() < 0.1 && this.powerUps.length < 1) {
       this.powerUps.push(new PowerUpHeart(this))
+    }
+
+    if (this.obstacleTimer < this.obstacleInterval) {
+      this.obstacleTimer += deltaTime
+    } else if (this.gameSpeed > 0 && !this.gameEnd && Math.random() > 0.5) {
+      this.obstacles.push(new Obstacle(this.gameSpeed, this.ctx, this))
+      this.obstacleTimer = 0
     }
 
     this.powerUps.forEach(powerUp => {
@@ -202,9 +207,5 @@ export class Game {
 
   initGame() {
     this.addListener()
-    setTimeout(
-      () => this.generateBlocks(),
-      this.randomInterval(this.presetTime)
-    )
   }
 }

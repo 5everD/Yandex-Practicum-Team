@@ -27,8 +27,11 @@ export const Canvas = () => {
 
       game.initGame()
 
-      const render = () => {
-        game.start(context)
+      let lastTimestamp = 0
+      const render = (timestamp: number) => {
+        const deltaTime = timestamp - lastTimestamp
+        lastTimestamp = timestamp
+        game.start(context, deltaTime)
         animationFrameId = window.requestAnimationFrame(render)
 
         if (game.gameEnd) {
@@ -40,7 +43,7 @@ export const Canvas = () => {
         }
       }
 
-      render()
+      render(0)
     }
 
     return () => {

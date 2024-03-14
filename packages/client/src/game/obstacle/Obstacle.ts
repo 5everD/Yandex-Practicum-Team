@@ -22,7 +22,8 @@ export class Obstacle extends SpriteAnimation {
     super(ctx, blockSpriteInfo, 70 / 400)
 
     this.width = 70
-    this.x = ctx?.canvas.width + this.width
+    this.x =
+      ctx?.canvas.width + this.width + Math.random() * ctx?.canvas.width * 0.5
     this.size = this.width
     this.height = 70
     this.game = game
