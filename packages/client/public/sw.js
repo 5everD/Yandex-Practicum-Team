@@ -11,7 +11,7 @@ const URLS = [
   '/src/game/backgrounds/city/layer4.png',
   '/src/game/backgrounds/city/layer5.png',
   'https://i.ibb.co/HHBFJdH/char.png',
-  '/vite.svg',
+  '/runner.svg',
   '/src/index.css',
   '/src/main.tsx',
   '/src/App.tsx'
