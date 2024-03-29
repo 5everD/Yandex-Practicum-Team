@@ -9,7 +9,7 @@ global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') })
 )
 
-test('it has 12 routes', async () => {
+test('it has 4 routes', async () => {
   render(
     <BrowserRouter>
       <Provider store={store}>
@@ -17,5 +17,5 @@ test('it has 12 routes', async () => {
       </Provider>
     </BrowserRouter>
   )
-  expect(screen.getAllByRole('link')).toHaveLength(12)
+  expect(screen.getAllByRole('link')).toHaveLength(4)
 })
