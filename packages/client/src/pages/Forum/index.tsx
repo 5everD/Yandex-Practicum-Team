@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@/components/Button/Button'
-import { useToggle } from '@/hooks'
+import { useToggle } from '@/hooks/useToggle'
 import { createPortal } from 'react-dom'
 import { Modal } from '@/components/Modal'
 import { useNavigate } from 'react-router-dom'

@@ -18,11 +18,13 @@ export const StyledTh = styled.div`
   padding: 16px;
   border-bottom: 1px solid #d5d5d5;
   font-weight: 700;
+  color: ${props => props.theme.color};
 `
 
 export const StyledTd = styled.div`
   padding: 8px;
   border-bottom: 1px solid #d5d5d5;
+  color: ${props => props.theme.color};
 `
 
 export const StyledGrid = styled.div`

@@ -1,26 +1,23 @@
 import { useEffect } from 'react'
-import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { LoginPage } from './pages/Login'
 import { MainPage } from './pages/Main'
 import { SignupPage } from './pages/Signup'
 import { ProfilePage } from './pages/Profile'
-import GamePage from './pages/game.page'
+import { GamePage } from './pages/game.page'
+import { GameStartPage } from '@/pages/GameStart'
+import { GameEndPage } from '@/pages/GameEnd'
 import { LeaderboardPage } from './pages/Leaderboard'
 import { ForumPage } from './pages/Forum'
-import TopicPage from './pages/topic.page'
-import { Page404 } from './pages/Page_404'
-import Navigation from './components/navigation'
-import interceptorsProvider from './providers/interceptors.provider'
-import { GlobalWrapper } from './components/GlobalWrapper'
 import { ForumPostPage } from '@/pages/ForumPost'
+import { Page404 } from './pages/Page_404'
+import { GlobalWrapper } from './components/GlobalWrapper'
 import { startServiceWorker } from '@/sw.init'
 import { AuthRequired } from '@/components/AuthRequired'
-import { GameEndPage } from '@/pages/GameEnd'
-import { GameStartPage } from '@/pages/GameStart'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { ToggleTheme } from '@/components/ToggleTheme'
 import { ThemeContextProvider } from '@/context/ThemeProvider'
+import './App.css'
 
 function App() {
   useEffect(() => {
@@ -36,7 +33,6 @@ function App() {
     }
 
     fetchServerData()
-    interceptorsProvider()
     startServiceWorker()
   }, [])
 
@@ -45,7 +41,6 @@ function App() {
       <GlobalWrapper className={'global-wrapper'}>
         <ToggleTheme />
         <ErrorBoundary>
-          <Navigation />
           <Routes>
             <Route element={<AuthRequired />}>
               <Route path="profile" element={<ProfilePage />} />
@@ -57,7 +52,6 @@ function App() {
                 <Route index element={<ForumPage />} />
                 <Route path=":forumId" element={<ForumPostPage />} />
               </Route>
-              <Route path="topic" element={<TopicPage />} />
             </Route>
             <Route path="/" element={<MainPage />} index />
             <Route path="login" element={<LoginPage />} />

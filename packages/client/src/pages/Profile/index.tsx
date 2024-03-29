@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createPortal } from 'react-dom'
-import { useToggle } from '@/hooks'
+import { useToggle } from '@/hooks/useToggle'
 import { useAppSelector } from '@/store/store'
 import { setUser, selectUser } from '@/store/features/userSlice'
 import { IUser } from '@/store/api/types'
