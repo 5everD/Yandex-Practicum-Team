@@ -26,7 +26,7 @@ export const LoginPage: FC = () => {
     { isSuccess: oAuthSuccess, isError: oAuthError, error: oAuthError_ },
   ] = useOAuthMutation()
 
-  const uri = 'https://silent-hill-runner-34.ya-praktikum.tech/login'
+  const uri = window.location.href.split('?')[0]
   const code = window.location.search.split('code=')[1]
   const loginError = error || oAuthError_
   const [errors, validateForm] = useFormValidate(loginSchema)
@@ -82,9 +82,7 @@ export const LoginPage: FC = () => {
         <Button type="submit" $primary={true}>
           войти
         </Button>
-        <ButtonLink to={getYandexUrl('4a3f1e9382f74f14b202dee8e7e37362', uri)}>
-          Войти через яндекс
-        </ButtonLink>
+        <ButtonLink to={getYandexUrl(uri)}>Войти через яндекс</ButtonLink>
         <Link to="/signup">регистрация</Link>
       </StyledForm>
     </Card>
