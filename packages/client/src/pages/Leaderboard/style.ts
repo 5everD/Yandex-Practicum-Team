@@ -11,7 +11,7 @@ export const StyledLayout = styled.div`
 export const StyledTitle = styled.h2`
   margin-bottom: 24px;
   text-align: center;
-  color: #ffffff;
+  color: ${props => props.theme.color};
 `
 
 export const StyledTh = styled.div`
@@ -29,6 +29,6 @@ export const StyledGrid = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
-  color: #ffffff;
+  color: ${props => props.theme.color}
   text-align: center;
 `
