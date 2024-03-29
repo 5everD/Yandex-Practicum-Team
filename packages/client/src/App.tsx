@@ -10,7 +10,6 @@ import { LeaderboardPage } from './pages/Leaderboard'
 import { ForumPage } from './pages/Forum'
 import TopicPage from './pages/topic.page'
 import { Page404 } from './pages/Page_404'
-import Navigation from './components/navigation'
 import interceptorsProvider from './providers/interceptors.provider'
 import { GlobalWrapper } from './components/GlobalWrapper'
 import { ForumPostPage } from '@/pages/ForumPost'
@@ -45,7 +44,6 @@ function App() {
       <GlobalWrapper className={'global-wrapper'}>
         <ToggleTheme />
         <ErrorBoundary>
-          <Navigation />
           <Routes>
             <Route element={<AuthRequired />}>
               <Route path="profile" element={<ProfilePage />} />
