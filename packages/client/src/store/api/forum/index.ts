@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { TTopic } from './types'
-import { API_URL } from '@/store/api/config'
+import { APP_API_URL } from '@/store/api/config'
 
 export const forumApi = createApi({
   reducerPath: 'forumApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
+    baseUrl: APP_API_URL,
   }),
   tagTypes: ['Forums', 'Topics'],
   endpoints: builder => ({

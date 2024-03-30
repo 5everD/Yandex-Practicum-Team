@@ -6,12 +6,10 @@ const API_YA_BASE = 'https://ya-praktikum.tech/api/v2'
 const API_YA_AUTH_ENDPOINT = '/auth/user'
 
 export async function auth(req: Request, res: Response, next: NextFunction) {
-  if (res.locals.user) next()
-
   const authCookie = req.cookies?.authCookie
   const uuid = req.cookies?.uuid
 
-  if (!authCookie || !uuid) next()
+  if (!authCookie || !uuid) return next()
 
   const cookies = `authCookie=${authCookie};uuid=${uuid}`
 
@@ -21,25 +19,23 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
         Cookie: cookies,
       },
     })
+    res.locals.user = data
     console.log('axios')
     console.log({ data })
-    res.locals.user = data
   } catch (error) {
     console.log(
       (error as AxiosError).message ?? 'server auth: failed get /auth/user api'
     )
-    res.locals.user = null
   }
 
   if (res.locals?.user) {
     const data = res.locals.user
     try {
-      const dbUser = await usersService.findOrCreate({
+      await usersService.findOrCreate({
         authorIndex: data.id,
-        author: data.display_name,
+        author: data.first_name,
         userYandexId: data.id,
       })
-      console.log({ dbUser })
     } catch (error) {
       console.error('server auth: failed to create or get user from db')
     }

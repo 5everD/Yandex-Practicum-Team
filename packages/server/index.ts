@@ -7,7 +7,7 @@ import express from 'express'
 import * as path from 'path'
 import * as fs from 'fs'
 
-import { PreloadStateByUrlService } from './store/preloadStateByUrlService'
+// import { PreloadStateByUrlService } from './store/preloadStateByUrlService'
 
 import { sequelize } from './orm/sequelize'
 import { router } from './router'
@@ -28,9 +28,9 @@ async function startServer() {
     .use(cors())
     .use(cookieParser())
     .use(express.json())
-    .use(auth)
     .use(router)
     .use(express.static(path.resolve(srcPath, 'public')))
+    .use(auth)
 
   let vite: ViteDevServer | undefined
 
@@ -82,18 +82,16 @@ async function startServer() {
           .getHtmlAndStyleTags
       }
 
-      const state = await new PreloadStateByUrlService(url).getState()
+      const state = { userState: { user: null } }
       // @ts-ignore
-      let user = {}
+      console.log('res.locals.user')
+      console.log(res.locals.user)
       if (res.locals.user) {
-        console.log('res.locals.user')
-        console.log(res.locals.user)
-        user = res.locals.user
+        state.userState.user = res.locals.user
       }
-
       const { html: appHtml, styleTags } = await render({
         path: url,
-        state: { ...state, userState: { user } },
+        state,
       })
 
       const appHeadScript = `
@@ -119,8 +117,8 @@ async function startServer() {
   })
 
   try {
-    await sequelize.sync({ force: true })
-    // await sequelize.sync()
+    // await sequelize.sync({ force: true })
+    await sequelize.sync()
   } catch (e) {
     console.error('failed to connect to db')
     console.error(e)
