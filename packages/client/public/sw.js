@@ -1,8 +1,6 @@
 const CACHE_NAME = 'silent-hill-v1'
 
 const URLS = [
-  '/',
-  '/default_avatar.svg',
   '/fonts/horror.ttf',
   '/fonts/SLNTHLC.ttf',
   '/fonts/SLNTHLE.ttf',
@@ -41,18 +39,11 @@ const URLS = [
   '/game_powerups/heart.png',
   '/images/arrows.svg',
   '/images/default_avatar.svg',
+  '/images/fullscreen.svg',
   '/images/girl.webp',
-  '/index.js',
-  '/index.js',
+  '/images/moon.png',
+  '/images/sun.png',
   '/runner.svg',
-  '/src/App.tsx',
-  '/src/index.css',
-  '/src/index.css',
-  '/src/main.tsx',
-  '/sw.js',
-  '/vite.svg',
-  '/vite.svg',
-  'arrows.svg',
 ]
 
 const canBeCached = req =>
