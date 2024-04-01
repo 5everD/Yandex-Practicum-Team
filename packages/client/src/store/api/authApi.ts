@@ -42,6 +42,15 @@ export const authApi = createApi({
         }
       },
     }),
+    OAuthCode: builder.mutation<CodeResponse, { redirect_uri: string }>({
+      query(arg) {
+        return {
+          url: '/oauth/yandex/service-id',
+          params: { ...arg },
+          method: 'GET',
+        }
+      },
+    }),
     OAuth: builder.mutation<CodeResponse, OAuthRequest>({
       query(data) {
         return {
@@ -167,4 +176,5 @@ export const {
   useChangeAvatarMutation,
   useChangeProfileMutation,
   useOAuthMutation,
+  useOAuthCodeMutation,
 } = authApi

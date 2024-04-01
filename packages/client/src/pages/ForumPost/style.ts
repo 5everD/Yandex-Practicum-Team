@@ -4,7 +4,7 @@ export const StyledWrapper = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
-  background: aliceblue;
+  background: ${props => props.theme.backgroundColor};
   padding: 5rem 0;
   flex-direction: column;
   align-items: center;
