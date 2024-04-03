@@ -22,9 +22,11 @@ export const authApi = createApi({
     responseHandler: async response => {
       if (
         response.ok &&
-        [`${API_URL}/auth/signin`, `${API_URL}/auth/logout`].includes(
-          response.url
-        )
+        [
+          `${API_URL}/auth/signin`,
+          `${API_URL}/auth/logout`,
+          `${API_URL}/oauth/yandex`,
+        ].includes(response.url)
       ) {
         return Promise.resolve()
       } else {
@@ -63,8 +65,12 @@ export const authApi = createApi({
       async onQueryStarted(_args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled
-          dispatch(
-            userApi.endpoints.getMe.initiate(null, { forceRefetch: true })
+          setTimeout(
+            () =>
+              dispatch(
+                userApi.endpoints.getMe.initiate(null, { forceRefetch: true })
+              ),
+            200
           )
         } catch (error) {
           if (
