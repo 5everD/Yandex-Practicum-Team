@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 import type { TopicsCreateAttributes } from '../../orm/models/topics'
 import { topicsService } from './service'
+import type Users from '../../orm/models/users'
 
 export class TopicsApi {
   static getTopic = async (
@@ -22,14 +23,18 @@ export class TopicsApi {
   }
 
   static addTopic = async (
-    request: TypedRequestBody<TopicsCreateAttributes>,
+    request: TypedRequestBody<
+      TopicsCreateAttributes & {
+        author: Users
+      }
+    >,
     response: Response,
     next: NextFunction
   ) => {
     try {
       const {
         topicIndex = undefined,
-        authorIndex,
+        author: authorIndex,
         title,
         description,
       } = request.body

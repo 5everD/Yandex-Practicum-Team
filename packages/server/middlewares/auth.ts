@@ -34,7 +34,6 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
       await usersService.findOrCreate({
         authorIndex: data.id,
         author: data.first_name,
-        userYandexId: data.id,
       })
     } catch (error) {
       console.error('server auth: failed to create or get user from db')

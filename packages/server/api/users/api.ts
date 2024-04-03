@@ -25,8 +25,8 @@ export class UsersApi {
     response: Response
   ) => {
     try {
-      const { authorIndex = undefined, author, userYandexId } = request.body
-      const data = { authorIndex, author, userYandexId }
+      const { authorIndex, author } = request.body
+      const data = { authorIndex, author }
       console.log(data)
       const user = await usersService.create(data)
       response.json(user)
@@ -42,10 +42,9 @@ export class UsersApi {
     response: Response
   ) => {
     try {
-      const { id: userYandexId, display_name: author } = request.body
+      const { id: authorIndex, display_name: author } = request.body
       const user = await usersService.findOrCreate({
-        authorIndex: undefined,
-        userYandexId,
+        authorIndex,
         author,
       })
       response.json(user)
