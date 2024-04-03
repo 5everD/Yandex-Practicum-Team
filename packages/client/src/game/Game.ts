@@ -4,6 +4,9 @@ import { UI } from './UI'
 import { PowerUpHeart } from './powerUps'
 import { players } from './player'
 import { backgrounds, Background } from './background'
+import { Zombie } from './obstacle/Zombie'
+import { SpriteAnimation } from './SpriteAnimation'
+import { ZombieGreen } from './obstacle/ZombieGreen'
 
 export const gameProperties = {
   presetTime: 1500,
@@ -33,6 +36,8 @@ export class Game {
   gameEnd: boolean
   obstacleTimer: number
   obstacleInterval: number
+  enemies: Array<typeof SpriteAnimation> = []
+  zombieGreen: ZombieGreen
 
   constructor(
     context: CanvasRenderingContext2D,
@@ -61,6 +66,7 @@ export class Game {
     this.powerUps = []
     this.obstacleTimer = 0
     this.obstacleInterval = 900
+    this.zombieGreen = new ZombieGreen(0, this.ctx, this)
   }
 
   addListener() {
@@ -145,6 +151,7 @@ export class Game {
     this.background_.update()
     this.background_.draw(ctx)
     this.ui.draw(ctx)
+    this.zombieGreen.slide()
 
     this.player.draw()
 
@@ -154,8 +161,12 @@ export class Game {
 
     if (this.obstacleTimer < this.obstacleInterval) {
       this.obstacleTimer += deltaTime
-    } else if (this.gameSpeed > 0 && !this.gameEnd && Math.random() > 0.5) {
-      this.obstacles.push(new Obstacle(this.gameSpeed, this.ctx, this))
+    } else if (this.gameSpeed > 0 && !this.gameEnd) {
+      if (Math.random() > 0.5) {
+        this.obstacles.push(new Obstacle(this.gameSpeed, this.ctx, this))
+      } else {
+        this.obstacles.push(new Zombie(this.gameSpeed, this.ctx, this))
+      }
       this.obstacleTimer = 0
     }
 

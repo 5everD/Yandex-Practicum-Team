@@ -36,6 +36,8 @@ const URLS = [
   '/game_characters/wizard/sprite.png',
   '/game_characters/wizard/thumbnail.png',
   '/game_obstacles/obstacle.png',
+  '/game_obstacles/zombie.png',
+  '/game_obstacles/zombie-green.png',
   '/game_powerups/heart.png',
   '/images/arrows.svg',
   '/images/default_avatar.svg',

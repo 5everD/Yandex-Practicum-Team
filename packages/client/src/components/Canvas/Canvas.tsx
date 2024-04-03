@@ -17,13 +17,15 @@ export const Canvas = () => {
   const dispatch = useDispatch()
   const toggleFullScreen = useFullScreen(canvasRef, ['Alt', 'Enter'])
 
+  const w = 800 // document.body.clientWidth * .8
+  const h = w * 0.5
   useEffect(() => {
     const canvas: HTMLCanvasElement | null = canvasRef.current
     const context: CanvasRenderingContext2D | null = canvas!.getContext('2d')
     let animationFrameId: number
 
     if (context) {
-      const game = new Game(context, 800, 400, player, background)
+      const game = new Game(context, w, h, player, background)
 
       game.initGame()
 
