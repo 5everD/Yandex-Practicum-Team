@@ -16,7 +16,15 @@ class TopicsService {
       // raw: true,
       include: [
         { association: 'Users', attributes: [] },
-        { association: 'Comments', include: [{ association: 'Replies' }] },
+        {
+          association: 'Comments',
+          include: [
+            { association: 'Replies' },
+            {
+              association: 'Users',
+            },
+          ],
+        },
       ],
       attributes: [
         ['topic_id', 'index'],
@@ -24,6 +32,7 @@ class TopicsService {
         ['topic_description', 'description'],
         ['createdAt', 'time'],
         [col('"Users"."user_display_name"'), 'author'],
+        [col('"Comments"."Users"."user_display_name"'), '"Comments"."author"'],
       ],
     }
     return topicIndex ? Topics.findOne(params) : Topics.findAll(params)
