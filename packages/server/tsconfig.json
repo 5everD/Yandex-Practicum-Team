@@ -10,6 +10,7 @@
     "declarationMap": true,
     "removeComments": true,
     "strict": true,
+    "skipLibCheck": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitOverride": true,
@@ -18,12 +19,17 @@
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
-    "lib": ["es2019", "esnext.asynciterable"],
+    "lib": ["es2019", "esnext.asynciterable", "DOM"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
       "*": ["types/*"]
     },
-    "outDir": "dist"
+    "outDir": "dist",
+  },
+  "ts-node": {
+    "files": true
   }
 }
